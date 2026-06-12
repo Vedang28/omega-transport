@@ -191,29 +191,27 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
 }
 
 /* ===== FLEET STAGE ===== */
-.stage--fleet { justify-content: flex-start; align-items: center; padding-left: 5%; }
+.stage--fleet { justify-content: flex-start; align-items: center; padding-left: 3%; }
 .fleet-panel {
-  width: 42%; max-height: 88vh; overflow-y: auto;
+  width: 34%; max-height: 85vh; overflow-y: auto;
   scrollbar-width: thin; scrollbar-color: var(--purple) transparent;
-  padding: 36px;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--grey-100);
+  padding: 28px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.06);
   border-radius: 16px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.06);
 }
 .fleet-panel::-webkit-scrollbar { width: 4px; }
 .fleet-panel::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 4px; }
 
 .vehicle-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
 .vehicle-card {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--grey-100);
-  border-radius: 14px; padding: 24px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  background: rgba(255,255,255,0.4);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 12px; padding: 20px;
+  transition: background 0.3s;
 }
-.vehicle-card:hover { border-color: var(--purple); box-shadow: 0 8px 30px rgba(90,75,178,0.12); }
+.vehicle-card:hover { background: rgba(255,255,255,0.55); }
 .vehicle-card__head { display: flex; align-items: baseline; gap: 4px; margin-bottom: 10px; }
 .vehicle-card__seats {
   font-family: var(--font-heading); font-size: 36px; font-weight: 900;
@@ -238,16 +236,15 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
 .coverage-bar p { font-size: 13px; color: var(--grey-600); line-height: 1.6; }
 
 /* ===== ABOUT STAGE ===== */
-.stage--about { justify-content: flex-end; align-items: center; padding-right: 5%; }
+.stage--about { justify-content: flex-end; align-items: center; padding-right: 3%; }
 .about-panel {
-  width: 48%; max-height: 88vh; overflow-y: auto;
+  width: 38%; max-height: 85vh; overflow-y: auto;
   scrollbar-width: thin; scrollbar-color: var(--purple) transparent;
-  padding: 36px;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--grey-100);
+  padding: 28px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.06);
   border-radius: 16px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.06);
 }
 .about-panel::-webkit-scrollbar { width: 4px; }
 .about-panel::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 4px; }
@@ -264,11 +261,10 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
   display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap;
 }
 .about-highlight {
-  flex: 1; min-width: 200px;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--grey-100);
-  border-radius: 12px; padding: 20px;
+  flex: 1; min-width: 140px;
+  background: rgba(255,255,255,0.3);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 10px; padding: 16px;
 }
 .about-highlight__icon { font-size: 24px; display: block; margin-bottom: 10px; }
 .about-highlight h4 {
@@ -284,15 +280,14 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
 .about-panel__services p { font-size: 13px; color: var(--grey-600); line-height: 1.6; }
 
 /* ===== CONTACT STAGE ===== */
-.stage--contact { justify-content: center; align-items: center; }
+.stage--contact { justify-content: flex-end; align-items: flex-end; padding: 0 3% 5%; }
 .contact-panel {
-  max-width: 600px; width: 90%;
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--grey-100);
-  border-radius: 20px; padding: 48px 44px;
+  max-width: 420px; width: 100%;
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px; padding: 32px 28px;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
 }
 .contact-panel .section-heading { margin-bottom: 4px; }
 .contact-panel .section-intro { margin: 0 auto 32px; }
