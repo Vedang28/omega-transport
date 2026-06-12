@@ -78,7 +78,7 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
 
 /* ===== JOURNEY ===== */
 .journey { position: relative; width: 100%; }
-.journey__track { height: 1800vh; position: relative; }
+.journey__track { height: 3500vh; position: relative; }
 .journey__sticky {
   position: sticky; top: 0; width: 100%; height: 100vh;
   overflow: hidden; background: var(--navy-deep);
@@ -209,8 +209,10 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
   background: rgba(255,255,255,0.4);
   border: 1px solid rgba(0,0,0,0.05);
   border-radius: 12px; padding: 20px;
-  transition: background 0.3s;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
 }
+.vehicle-card.visible { opacity: 1; transform: translateY(0); }
 .vehicle-card:hover { background: rgba(255,255,255,0.55); }
 .vehicle-card__head { display: flex; align-items: baseline; gap: 4px; margin-bottom: 10px; }
 .vehicle-card__seats {
@@ -310,6 +312,36 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
 
 .contact-panel__cta {
   display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+}
+
+/* ===== STAGGER ITEMS (appear one-by-one on scroll) ===== */
+.fleet-panel .section-heading,
+.fleet-panel .section-intro,
+.coverage-bar,
+.about-panel .section-heading,
+.about-block,
+.about-highlight,
+.about-panel__services,
+.contact-panel .section-heading,
+.contact-panel .section-intro,
+.contact-block,
+.contact-panel__cta {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fleet-panel .section-heading.visible,
+.fleet-panel .section-intro.visible,
+.coverage-bar.visible,
+.about-panel .section-heading.visible,
+.about-block.visible,
+.about-highlight.visible,
+.about-panel__services.visible,
+.contact-panel .section-heading.visible,
+.contact-panel .section-intro.visible,
+.contact-block.visible,
+.contact-panel__cta.visible,
+.vehicle-card.visible {
+  opacity: 1; transform: translateY(0);
 }
 
 /* ===== BUTTONS ===== */
