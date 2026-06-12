@@ -10,26 +10,26 @@
     { path: "frames-v2/frame_", count: 121 },
     { path: "frames-v3/frame_", count: 121 },
     { path: "frames-v4/frame_", count: 121 },
-    // Dip: intro -> journey
-    { path: "dip-1/frame_",     count: 15 },
+    // Dip: intro -> journey (fade out product, fade in road)
+    { path: "dip-1/frame_",     count: 19 },
     // Cinematic journey: approach
     { path: "shot-01/frame_",   count: 121 },
     { path: "shot-02/frame_",   count: 121 },
     { path: "shot-03/frame_",   count: 121 },
-    // Dip: road -> lot
-    { path: "dip-2/frame_",     count: 12 },
+    // Dip: road -> lot (fade out road, fade in lot)
+    { path: "dip-2/frame_",     count: 19 },
     // Lot entry
     { path: "shot-04/frame_",   count: 121 },
-    // Dip: direction cut (skip shot 5)
-    { path: "dip-3/frame_",     count: 12 },
+    // Dip: direction cut (fade out lot entry, fade in fleet)
+    { path: "dip-3/frame_",     count: 19 },
     // Fleet showcase
     { path: "shot-06/frame_",   count: 121 },
     { path: "shot-07/frame_",   count: 121 },
     { path: "shot-08/frame_",   count: 121 },
     { path: "shot-09/frame_",   count: 121 },
     { path: "shot-10/frame_",   count: 121 },
-    // Dip: lot -> street
-    { path: "dip-4/frame_",     count: 12 },
+    // Dip: lot -> street (fade out lot, fade in campus)
+    { path: "dip-4/frame_",     count: 19 },
     // About: campus & buildings
     { path: "shot-11/frame_",   count: 121 },
     { path: "shot-12/frame_",   count: 121 },
@@ -38,7 +38,7 @@
     { path: "shot-14/frame_",   count: 121 },
   ];
 
-  const TOTAL = SEQUENCES.reduce((s, v) => s + v.count, 0); // 2108
+  const TOTAL = SEQUENCES.reduce((s, v) => s + v.count, 0); // 2133
   let loadedCount = 0;
   let currentDrawn = -1;
   let targetGlobal = 0;
