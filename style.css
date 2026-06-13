@@ -201,7 +201,7 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
 }
 
 /* ===== FLEET STAGE ===== */
-.stage--fleet { justify-content: flex-start; align-items: center; padding-left: 3%; }
+.stage--fleet { justify-content: flex-end; align-items: center; padding-right: 3%; }
 .fleet-panel {
   width: 34%; max-height: 85vh; overflow-y: auto;
   scrollbar-width: thin; scrollbar-color: var(--purple) transparent;
