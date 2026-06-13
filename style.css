@@ -203,13 +203,10 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
 /* ===== FLEET STAGE ===== */
 .stage--fleet { justify-content: flex-end; align-items: center; padding-right: 3%; }
 .fleet-panel {
-  width: 34%; max-height: 85vh; overflow-y: auto;
-  scrollbar-width: thin; scrollbar-color: var(--purple) transparent;
+  width: 34%;
   padding: 28px;
   background: none;
 }
-.fleet-panel::-webkit-scrollbar { width: 4px; }
-.fleet-panel::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 4px; }
 
 .vehicle-grid { display: grid; grid-template-columns: 1fr; margin-bottom: 24px; }
 .vehicle-card {
