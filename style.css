@@ -189,6 +189,16 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
   font-size: 15px; color: var(--grey-600);
   line-height: 1.6; margin-bottom: 32px; max-width: 520px;
 }
+.fleet-panel .section-heading,
+.about-panel .section-heading,
+.contact-panel .section-heading {
+  color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+.fleet-panel .section-intro,
+.about-panel .section-intro,
+.contact-panel .section-intro {
+  color: rgba(255,255,255,0.8); text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
 
 /* ===== FLEET STAGE ===== */
 .stage--fleet { justify-content: flex-start; align-items: center; padding-left: 3%; }
@@ -196,46 +206,45 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
   width: 34%; max-height: 85vh; overflow-y: auto;
   scrollbar-width: thin; scrollbar-color: var(--purple) transparent;
   padding: 28px;
-  background: rgba(255,255,255,0.35);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 16px;
+  background: none;
 }
 .fleet-panel::-webkit-scrollbar { width: 4px; }
 .fleet-panel::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 4px; }
 
 .vehicle-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
 .vehicle-card {
-  background: rgba(255,255,255,0.4);
-  border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 12px; padding: 20px;
+  background: none;
+  border: none;
+  border-radius: 0; padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
   opacity: 0; transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
+.vehicle-card:last-child { border-bottom: none; }
 .vehicle-card.visible { opacity: 1; transform: translateY(0); }
-.vehicle-card:hover { background: rgba(255,255,255,0.55); }
 .vehicle-card__head { display: flex; align-items: baseline; gap: 4px; margin-bottom: 10px; }
 .vehicle-card__seats {
   font-family: var(--font-heading); font-size: 36px; font-weight: 900;
   color: var(--purple); line-height: 1;
 }
+.vehicle-card__seats { text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
 .vehicle-card__seats-label {
   font-family: var(--font-heading); font-size: 13px; font-weight: 500;
-  color: var(--grey-600); text-transform: uppercase; letter-spacing: 1px;
+  color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 .vehicle-card h3 {
   font-family: var(--font-heading); font-size: 17px; font-weight: 700;
-  color: var(--grey-900); margin-bottom: 8px;
+  color: #fff; margin-bottom: 8px; text-shadow: 0 1px 6px rgba(0,0,0,0.7);
 }
-.vehicle-card p { font-size: 13px; color: var(--grey-600); line-height: 1.65; }
+.vehicle-card p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.65; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 
 .coverage-bar {
   display: flex; gap: 12px; align-items: flex-start;
-  padding: 16px 20px; background: rgba(90,75,178,0.06);
-  border: 1px solid rgba(90,75,178,0.15); border-radius: 10px;
+  padding: 16px 0; background: none; border: none;
 }
 .coverage-bar__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-.coverage-bar p { font-size: 13px; color: var(--grey-600); line-height: 1.6; }
+.coverage-bar p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.6; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 
 /* ===== ABOUT STAGE ===== */
 .stage--about { justify-content: flex-end; align-items: center; padding-right: 3%; }
@@ -243,10 +252,7 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
   width: 38%; max-height: 85vh; overflow-y: auto;
   scrollbar-width: thin; scrollbar-color: var(--purple) transparent;
   padding: 28px;
-  background: rgba(255,255,255,0.35);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 16px;
+  background: none;
 }
 .about-panel::-webkit-scrollbar { width: 4px; }
 .about-panel::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 4px; }
@@ -255,39 +261,38 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
 .about-block h3 {
   font-family: var(--font-heading); font-size: 16px; font-weight: 700;
   color: var(--purple); margin-bottom: 8px; text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.5px; text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
-.about-block p { font-size: 14px; color: var(--grey-600); line-height: 1.7; margin-bottom: 8px; }
+.about-block p { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 8px; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 
 .about-panel__highlights {
   display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap;
 }
 .about-highlight {
   flex: 1; min-width: 140px;
-  background: rgba(255,255,255,0.3);
-  border: 1px solid rgba(0,0,0,0.05);
-  border-radius: 10px; padding: 16px;
+  background: none;
+  border: none;
+  border-radius: 0; padding: 16px 0;
 }
 .about-highlight__icon { font-size: 24px; display: block; margin-bottom: 10px; }
 .about-highlight h4 {
   font-family: var(--font-heading); font-size: 14px; font-weight: 700;
-  color: var(--grey-900); margin-bottom: 6px;
+  color: #fff; margin-bottom: 6px; text-shadow: 0 1px 6px rgba(0,0,0,0.7);
 }
-.about-highlight p { font-size: 12px; color: var(--grey-600); line-height: 1.6; }
+.about-highlight p { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.6; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 
 .about-panel__services {
-  padding: 16px 20px; background: rgba(90,75,178,0.06);
-  border: 1px solid rgba(90,75,178,0.15); border-radius: 10px;
+  padding: 16px 20px; background: none;
+  border: none; border-radius: 10px;
 }
-.about-panel__services p { font-size: 13px; color: var(--grey-600); line-height: 1.6; }
+.about-panel__services p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.6; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 
 /* ===== CONTACT STAGE ===== */
 .stage--contact { justify-content: flex-end; align-items: flex-end; padding: 0 3% 5%; }
 .contact-panel {
   max-width: 420px; width: 100%;
-  background: rgba(255,255,255,0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(0,0,0,0.06);
+  background: none;
+  border: none;
   border-radius: 16px; padding: 32px 28px;
   text-align: center;
 }
@@ -302,10 +307,12 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
   font-family: var(--font-heading); font-size: 11px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 1.5px;
   color: var(--purple); margin-bottom: 8px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
 .contact-block a, .contact-block p {
-  display: block; color: var(--grey-900);
+  display: block; color: rgba(255,255,255,0.9);
   text-decoration: none; font-size: 14px; line-height: 1.6;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 .contact-block__big { font-size: 18px !important; font-weight: 600; }
 .contact-block a:hover { color: var(--purple); }
