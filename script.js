@@ -191,8 +191,20 @@
     // ── Callout stagger ──
     stagger(".callout", STAGES.callouts);
 
-    // ── Fleet stagger (heading -> intro -> cards -> coverage) ──
-    stagger(".fleet-panel .section-heading, .fleet-panel .section-intro, .vehicle-card, .coverage-bar", STAGES.fleet);
+    // ── Fleet stagger (heading -> intro -> coverage) ──
+    stagger(".fleet-panel .section-heading, .fleet-panel .section-intro, .coverage-bar", STAGES.fleet);
+
+    // ── Fleet vehicle swap (one card at a time, synced to video shots) ──
+    const VEHICLE_RANGES = [
+      { in: 0.51,  out: 0.565 },
+      { in: 0.565, out: 0.62  },
+      { in: 0.62,  out: 0.67  },
+      { in: 0.67,  out: 0.73  },
+    ];
+    document.querySelectorAll(".vehicle-card").forEach((card, i) => {
+      const r = VEHICLE_RANGES[i];
+      card.classList.toggle("visible", p >= r.in && p <= r.out);
+    });
 
     // ── About stagger (heading -> blocks -> highlights -> services) ──
     stagger(".about-panel .section-heading, .about-block, .about-highlight, .about-panel__services", STAGES.about);

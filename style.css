@@ -211,17 +211,17 @@ body { font-family: var(--font-body); color: var(--white); background: var(--nav
 .fleet-panel::-webkit-scrollbar { width: 4px; }
 .fleet-panel::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 4px; }
 
-.vehicle-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+.vehicle-grid { display: grid; grid-template-columns: 1fr; margin-bottom: 24px; }
 .vehicle-card {
+  grid-row: 1; grid-column: 1;
   background: none;
   border: none;
-  border-radius: 0; padding: 20px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-  opacity: 0; transform: translateY(16px);
+  padding: 20px 0;
+  opacity: 0; transform: translateY(12px);
   transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
 }
-.vehicle-card:last-child { border-bottom: none; }
-.vehicle-card.visible { opacity: 1; transform: translateY(0); }
+.vehicle-card.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .vehicle-card__head { display: flex; align-items: baseline; gap: 4px; margin-bottom: 10px; }
 .vehicle-card__seats {
   font-family: var(--font-heading); font-size: 36px; font-weight: 900;
