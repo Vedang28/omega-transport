@@ -10,26 +10,18 @@
     { path: "frames-v2/frame_", count: 121 },
     { path: "frames-v3/frame_", count: 121 },
     { path: "frames-v4/frame_", count: 121 },
-    // Dip: intro -> journey (fade out product, fade in road)
-    { path: "dip-1/frame_",     count: 19 },
     // Cinematic journey: approach
     { path: "shot-01/frame_",   count: 121 },
     { path: "shot-02/frame_",   count: 121 },
     { path: "shot-03/frame_",   count: 121 },
-    // Dip: road -> lot (fade out road, fade in lot)
-    { path: "dip-2/frame_",     count: 19 },
     // Lot entry
     { path: "shot-04/frame_",   count: 121 },
-    // Dip: direction cut (fade out lot entry, fade in fleet)
-    { path: "dip-3/frame_",     count: 19 },
     // Fleet showcase
     { path: "shot-06/frame_",   count: 121 },
     { path: "shot-07/frame_",   count: 121 },
     { path: "shot-08/frame_",   count: 121 },
     { path: "shot-09/frame_",   count: 121 },
     { path: "shot-10/frame_",   count: 121 },
-    // Dip: lot -> street (fade out lot, fade in campus)
-    { path: "dip-4/frame_",     count: 19 },
     // About: campus & buildings
     { path: "shot-11/frame_",   count: 121 },
     { path: "shot-12/frame_",   count: 121 },
@@ -38,7 +30,8 @@
     { path: "shot-14/frame_",   count: 121 },
   ];
 
-  const TOTAL = SEQUENCES.reduce((s, v) => s + v.count, 0); // 2133
+  // 17 sequences × 121 = 2057 total frames
+  const TOTAL = SEQUENCES.reduce((s, v) => s + v.count, 0);
   let loadedCount = 0;
   let currentDrawn = -1;
   let targetGlobal = 0;
@@ -99,53 +92,80 @@
   function clamp01(v) { return Math.max(0, Math.min(1, v)); }
 
   // ─── SCROLL MAP ───
-  // 2108 total frames. 0% -> 100% = frame 0 -> 2107.
+  // 2057 total frames, 17 sequences × 121 each.
+  // Canvas starts at p=0.06. Frame = floor(((p-0.06)/0.94) * 2056).
   //
-  // Frame layout:
-  //   0-483     Original intro (product showcase on white/dark bg)
-  //   484-498   Dip to black (intro -> journey)
-  //   499-861   Shots 1-3 (approach, GTA sweep, cruising)
-  //   862-873   Dip to black (road -> lot)
-  //   874-994   Shot 4 (entering lot, bus turns)
-  //   995-1006  Dip to black (direction cut)
-  //   1007-1611 Shots 6-10 (fleet showcase in lot)
-  //   1612-1623 Dip to black (lot -> street)
-  //   1624-1865 Shots 11-12 (campus, Omega Life)
-  //   1866-2107 Shots 13-14 (office, final frame)
+  // Frame layout (no dips):
+  //   0-483     Product showcase (4 sequences)
+  //   484-604   Shot 01 — approach
+  //   605-725   Shot 02 — GTA sweep
+  //   726-846   Shot 03 — cruising
+  //   847-967   Shot 04 — entering lot
+  //   968-1088  Shot 06 — fleet: 17-seat
+  //   1089-1209 Shot 07 — fleet: 7-seat
+  //   1210-1330 Shot 08 — fleet: people carrier
+  //   1331-1451 Shot 09 — fleet: mercedes
+  //   1452-1572 Shot 10 — driving past building
+  //   1573-1693 Shot 11 — campus
+  //   1694-1814 Shot 12 — arriving at office
+  //   1815-1935 Shot 13 — office
+  //   1936-2056 Shot 14 — final frame
+  //
+  // Scene boundaries (scroll %):
+  //   0.281  product → journey
+  //   0.447  road → lot
+  //   0.503  lot → fleet
+  //   0.724  fleet → about
+  //   0.835  about → contact
 
   const STAGES = {
     title:    { in: 0.00, out: 0.08 },
     tagline:  { in: 0.10, out: 0.20 },
-    callouts: { in: 0.28, out: 0.44 },
-    fleet:    { in: 0.51, out: 0.77 },
-    about:    { in: 0.79, out: 0.89 },
-    contact:  { in: 0.90, out: 1.00 },
+    callouts: { in: 0.30, out: 0.45 },
+    fleet:    { in: 0.50, out: 0.72 },
+    about:    { in: 0.74, out: 0.84 },
+    contact:  { in: 0.85, out: 1.00 },
   };
 
   const ACTIVE_SECTION = {
     home:    [0, 0.50],
-    fleet:   [0.50, 0.79],
-    about:   [0.79, 0.90],
-    contact: [0.90, 1],
+    fleet:   [0.50, 0.74],
+    about:   [0.74, 0.85],
+    contact: [0.85, 1],
   };
+
+  // Subtle opacity dips at scene transitions (instead of black screens)
+  const SCENE_DIPS = [
+    { at: 0.281, half: 0.008, min: 0.15 },
+    { at: 0.447, half: 0.006, min: 0.4 },
+    { at: 0.503, half: 0.006, min: 0.4 },
+    { at: 0.724, half: 0.006, min: 0.4 },
+  ];
 
   function onScroll() {
     const p = getProgress();
 
-    // ── Continuous frame playback ──
+    // ── Continuous frame playback with subtle scene dips ──
     if (p < 0.06) {
       canvas.style.opacity = "0";
       targetGlobal = 0;
     } else {
-      canvas.style.opacity = "1";
       const fp = (p - 0.06) / 0.94;
       targetGlobal = Math.min(TOTAL - 1, Math.floor(fp * (TOTAL - 1)));
+
+      let opacity = 1;
+      for (const d of SCENE_DIPS) {
+        const dist = Math.abs(p - d.at);
+        if (dist < d.half) {
+          opacity = Math.min(opacity, d.min + (1 - d.min) * (dist / d.half));
+        }
+      }
+      canvas.style.opacity = String(opacity);
     }
 
     canvas.style.transform = "translate(-50%, -50%)";
 
     // ── Background ──
-    // Dark for intro showcase -> light for product spin -> dark for cinematic journey
     const sticky = document.querySelector(".journey__sticky");
     if (p < 0.10) {
       sticky.style.background = "rgb(10,12,26)";
@@ -155,10 +175,10 @@
       const g = Math.round(12 + 233 * t);
       const b = Math.round(26 + 221 * t);
       sticky.style.background = `rgb(${r},${g},${b})`;
-    } else if (p < 0.265) {
+    } else if (p < 0.27) {
       sticky.style.background = "rgb(245,245,247)";
-    } else if (p < 0.28) {
-      const t = (p - 0.265) / 0.015;
+    } else if (p < 0.285) {
+      const t = (p - 0.27) / 0.015;
       const r = Math.round(245 - 235 * t);
       const g = Math.round(245 - 233 * t);
       const b = Math.round(247 - 221 * t);
@@ -196,10 +216,10 @@
 
     // ── Fleet vehicle swap (one card at a time, synced to video shots) ──
     const VEHICLE_RANGES = [
-      { in: 0.51,  out: 0.565 },
-      { in: 0.565, out: 0.62  },
-      { in: 0.62,  out: 0.67  },
-      { in: 0.67,  out: 0.73  },
+      { in: 0.50,  out: 0.558 },
+      { in: 0.558, out: 0.613 },
+      { in: 0.613, out: 0.668 },
+      { in: 0.668, out: 0.723 },
     ];
     document.querySelectorAll(".vehicle-card").forEach((card, i) => {
       const r = VEHICLE_RANGES[i];
@@ -238,7 +258,7 @@
   }
 
   // Nav smooth scroll
-  const sectionMap = { home: 0, "our-fleet": 0.51, "about-us": 0.79, "contact-us": 0.91 };
+  const sectionMap = { home: 0, "our-fleet": 0.50, "about-us": 0.74, "contact-us": 0.85 };
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
@@ -253,7 +273,7 @@
   });
 
   // Dots click
-  const dotMap = { home: 0, fleet: 0.51, about: 0.79, contact: 0.91 };
+  const dotMap = { home: 0, fleet: 0.50, about: 0.74, contact: 0.85 };
   document.querySelectorAll(".dot").forEach(dot => {
     dot.addEventListener("click", () => {
       const targetP = dotMap[dot.dataset.section];
