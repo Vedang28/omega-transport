@@ -155,10 +155,10 @@
       const g = Math.round(12 + 233 * t);
       const b = Math.round(26 + 221 * t);
       sticky.style.background = `rgb(${r},${g},${b})`;
-    } else if (p < 0.26) {
+    } else if (p < 0.265) {
       sticky.style.background = "rgb(245,245,247)";
-    } else if (p < 0.30) {
-      const t = (p - 0.26) / 0.04;
+    } else if (p < 0.28) {
+      const t = (p - 0.265) / 0.015;
       const r = Math.round(245 - 235 * t);
       const g = Math.round(245 - 233 * t);
       const b = Math.round(247 - 221 * t);
